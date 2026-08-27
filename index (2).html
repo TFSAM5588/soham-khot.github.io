@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Soham Khot — Cybersecurity Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --bg-secondary: #f6f7f9;
+      --bg-tertiary: #f0f2f5;
+      --text-primary: #111318;
+      --text-secondary: #4b5263;
+      --text-tertiary: #8a91a0;
+      --border: rgba(0,0,0,0.10);
+      --border-medium: rgba(0,0,0,0.18);
+      --blue-bg: #E6F1FB;
+      --blue-mid: #378ADD;
+      --blue-dark: #185FA5;
+      --blue-border: #B5D4F4;
+      --green-bg: #EAF3DE;
+      --green-mid: #639922;
+      --green-dark: #3B6D11;
+      --green-border: #C0DD97;
+      --amber-bg: #FAEEDA;
+      --amber-dark: #854F0B;
+      --amber-border: #FAC775;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1c22;
+        --bg-secondary: #22242c;
+        --bg-tertiary: #2a2d38;
+        --text-primary: #e8eaf0;
+        --text-secondary: #9aa0b4;
+        --text-tertiary: #5c6278;
+        --border: rgba(255,255,255,0.10);
+        --border-medium: rgba(255,255,255,0.18);
+        --blue-bg: #0c2a45;
+        --blue-mid: #378ADD;
+        --blue-dark: #85B7EB;
+        --blue-border: #0c447c;
+        --green-bg: #173404;
+        --green-mid: #639922;
+        --green-dark: #C0DD97;
+        --green-border: #27500A;
+        --amber-bg: #412402;
+        --amber-dark: #FAC775;
+        --amber-border: #633806;
+      }
+    }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* Nav */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--bg);
+      border-bottom: 0.5px solid var(--border);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px;
+    }
+    .nav-brand { font-size: 15px; font-weight: 600; color: var(--text-primary); cursor: default; }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links button { font-size: 13px; color: var(--text-secondary); text-decoration: none; background: none; border: none; cursor: pointer; font-family: inherit; padding: 0; }
+    .nav-links button:hover { color: var(--blue-mid); }
+    .nav-links button.active { color: var(--blue-mid); font-weight: 500; }
+
+    /* Layout */
+    .page { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+    /* Hero */
+    .hero {
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      display: flex; align-items: flex-start; gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .avatar {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: var(--blue-bg); border: 0.5px solid var(--blue-border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px; font-weight: 600; color: var(--blue-dark);
+      flex-shrink: 0;
+    }
+    .hero-text h1 { font-size: 26px; font-weight: 600; letter-spacing: -0.3px; }
+    .hero-role { font-size: 14px; color: var(--text-secondary); margin-top: 4px; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+    .meta-chip { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text-secondary); }
+    .meta-chip i { font-size: 14px; color: var(--blue-mid); }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .badge { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 500; padding: 4px 11px; border-radius: 99px; }
+    .badge-green { background: var(--green-bg); color: var(--green-dark); border: 0.5px solid var(--green-border); }
+    .badge-amber { background: var(--amber-bg); color: var(--amber-dark); border: 0.5px solid var(--amber-border); }
+    .badge-blue { background: var(--blue-bg); color: var(--blue-dark); border: 0.5px solid var(--blue-border); }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green-mid); }
+
+    /* Section */
+    section { margin-bottom: 1.5rem; }
+    .section-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.09em;
+      text-transform: uppercase; color: var(--text-tertiary);
+      margin-bottom: 1rem;
+    }
+
+    /* Card base */
+    .card {
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+    }
+
+    /* About */
+    .about-text { font-size: 14px; color: var(--text-secondary); line-height: 1.75; }
+
+    /* Skills */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); gap: 10px; }
+    .skill-card {
+      background: var(--bg); border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg); padding: 14px 16px;
+    }
+    .skill-icon { font-size: 20px; color: var(--blue-dark); margin-bottom: 8px; }
+    .skill-name { font-size: 13px; font-weight: 500; }
+    .skill-desc { font-size: 12px; color: var(--text-secondary); margin-top: 3px; line-height: 1.4; }
+    .bar-wrap { margin-top: 10px; height: 3px; background: var(--bg-secondary); border-radius: 99px; overflow: hidden; }
+    .bar { height: 100%; border-radius: 99px; background: var(--blue-mid); }
+
+    /* Projects */
+    .project-list { display: flex; flex-direction: column; gap: 12px; }
+    .project-card {
+      background: var(--bg); border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg); padding: 18px 20px;
+      display: flex; gap: 16px;
+    }
+    .proj-icon {
+      width: 38px; height: 38px; border-radius: var(--radius-md);
+      background: var(--blue-bg); border: 0.5px solid var(--blue-border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: var(--blue-dark); flex-shrink: 0;
+    }
+    .proj-icon.green { background: var(--green-bg); border-color: var(--green-border); color: var(--green-dark); }
+    .proj-icon.amber { background: var(--amber-bg); border-color: var(--amber-border); color: var(--amber-dark); }
+    .proj-body { flex: 1; min-width: 0; }
+    .proj-title { font-size: 14px; font-weight: 500; }
+    .proj-label { font-size: 11px; color: var(--text-tertiary); margin-top: 2px; }
+    .proj-desc { font-size: 13px; color: var(--text-secondary); margin-top: 8px; line-height: 1.65; }
+    .highlight-box {
+      border-left: 2px solid var(--blue-mid);
+      padding: 9px 12px;
+      background: var(--blue-bg);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      margin-top: 10px;
+      font-size: 12px; color: var(--blue-dark); line-height: 1.5;
+    }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+    .tag { font-size: 11px; padding: 3px 9px; border-radius: 99px; background: var(--blue-bg); color: var(--blue-dark); border: 0.5px solid var(--blue-border); }
+    .tag-green { background: var(--green-bg); color: var(--green-dark); border-color: var(--green-border); }
+    .tag-gray { background: var(--bg-secondary); color: var(--text-secondary); border: 0.5px solid var(--border); }
+
+    /* Timeline */
+    .timeline { padding-left: 20px; border-left: 0.5px solid var(--border); display: flex; flex-direction: column; gap: 1.4rem; }
+    .tl-item { position: relative; }
+    .tl-dot {
+      position: absolute; left: -24px; top: 5px;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--blue-mid);
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 0 1px var(--blue-border);
+    }
+    .tl-dot.green { background: var(--green-mid); box-shadow: 0 0 0 1px var(--green-border); }
+    .tl-date { font-size: 11px; color: var(--text-tertiary); font-weight: 500; }
+    .tl-title { font-size: 14px; font-weight: 500; margin-top: 2px; }
+    .tl-sub { font-size: 13px; color: var(--text-secondary); margin-top: 3px; line-height: 1.5; }
+    .gpa-banner { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .gpa-pill { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; padding: 4px 11px; border-radius: 99px; background: var(--green-bg); color: var(--green-dark); border: 0.5px solid var(--green-border); }
+
+    /* Certs */
+    .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+    .cert-card {
+      background: var(--bg-secondary); border: 0.5px solid var(--border);
+      border-radius: var(--radius-md); padding: 14px 16px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .cert-card i { font-size: 22px; color: var(--green-dark); flex-shrink: 0; }
+    .cert-name { font-size: 13px; font-weight: 500; }
+    .cert-issuer { font-size: 12px; color: var(--text-secondary); }
+    .cert-inprogress { font-size: 11px; color: #BA7517; margin-top: 2px; }
+    .cert-active { font-size: 11px; color: var(--green-mid); margin-top: 2px; }
+
+    /* Contact */
+    .contact-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .contact-chip {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; padding: 9px 16px;
+      border-radius: var(--radius-md);
+      border: 0.5px solid var(--border);
+      background: var(--bg); color: var(--text-primary);
+      text-decoration: none; transition: background 0.15s;
+    }
+    .contact-chip:hover { background: var(--bg-secondary); }
+    .contact-chip i { font-size: 16px; color: var(--blue-mid); }
+
+    /* Footer */
+    footer {
+      text-align: center; font-size: 12px; color: var(--text-tertiary);
+      padding-top: 2rem; border-top: 0.5px solid var(--border);
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 600px) {
+      .hero { flex-direction: column; gap: 1rem; padding: 1.5rem; }
+      nav { padding: 0 1rem; }
+      .nav-links { gap: 1rem; }
+      .page { padding: 1rem 1rem 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-brand">Soham Khot</span>
+    <div class="nav-links">
+      <button onclick="document.querySelector('#about').scrollIntoView({behavior:'smooth'})">About</button>
+      <button onclick="document.querySelector('#skills').scrollIntoView({behavior:'smooth'})">Skills</button>
+      <button onclick="document.querySelector('#projects').scrollIntoView({behavior:'smooth'})">Projects</button>
+      <button onclick="document.querySelector('#education').scrollIntoView({behavior:'smooth'})">Education</button>
+      <button onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">Contact</button>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="avatar">SK</div>
+      <div class="hero-text">
+        <h1>Soham Khot</h1>
+        <div class="hero-role">Computer Science — Cybersecurity Concentration &nbsp;·&nbsp; University of South Carolina Aiken</div>
+        <div class="hero-meta">
+          <span class="meta-chip"><i class="ti ti-phone" aria-hidden="true"></i> +1 (803) 262-8461</span>
+          <span class="meta-chip"><i class="ti ti-mail" aria-hidden="true"></i> sohamkhot2005@gmail.com</span>
+          <span class="meta-chip"><i class="ti ti-map-pin" aria-hidden="true"></i> Aiken, SC</span>
+        </div>
+        <div class="badge-row">
+          <span class="badge badge-green"><span class="dot"></span> Open to SOC internships &amp; entry-level roles</span>
+          <span class="badge badge-amber"><i class="ti ti-star" style="font-size:11px" aria-hidden="true"></i> President's List — Fall 2025 &amp; Spring 2026</span>
+          <span class="badge badge-blue">GPA 4.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- About -->
+    <section id="about">
+      <div class="section-label">About</div>
+      <div class="card">
+        <p class="about-text">I'm a senior at the University of South Carolina Aiken completing a B.S. in Computer Science with a concentration in Cybersecurity, graduating May 2027. My focus is blue-team operations — I've recently built a personal SOC home lab running Windows 11 and Kali Linux VMs on VirtualBox, using Splunk and Sysmon to detect and analyze real attack patterns including a Reverse TCP payload. Beyond security, I bring practical software engineering experience from a web development internship in India, and strong scripting and systems skills that translate directly to SOC analyst work.</p>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <div class="section-label">Technical Skills</div>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-icon"><i class="ti ti-chart-bar" aria-hidden="true"></i></div>
+          <div class="skill-name">SIEM — Splunk</div>
+          <div class="skill-desc">Log ingestion, threat detection, dashboards via home lab</div>
+          <div class="bar-wrap"><div class="bar" style="width:65%"></div></div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon"><i class="ti ti-wave-sine" aria-hidden="true"></i></div>
+          <div class="skill-name">Wireshark / Nmap</div>
+          <div class="skill-desc">Network traffic inspection, basic port scanning</div>
+          <div class="bar-wrap"><div class="bar" style="width:55%"></div></div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon"><i class="ti ti-alert-triangle" aria-hidden="true"></i></div>
+          <div class="skill-name">Incident Analysis</div>
+          <div class="skill-desc">Alert triage, log analysis, incident documentation</div>
+          <div class="bar-wrap"><div class="bar" style="width:60%"></div></div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon"><i class="ti ti-terminal-2" aria-hidden="true"></i></div>
+          <div class="skill-name">Linux &amp; Kali</div>
+          <div class="skill-desc">Ubuntu, Kali Linux, CLI tools, attacker-side workflows</div>
+          <div class="bar-wrap"><div class="bar" style="width:70%"></div></div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon"><i class="ti ti-code" aria-hidden="true"></i></div>
+          <div class="skill-name">Python / Java / C++</div>
+          <div class="skill-desc">Scripting, automation, backend development</div>
+          <div class="bar-wrap"><div class="bar" style="width:75%"></div></div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon"><i class="ti ti-topology-star" aria-hidden="true"></i></div>
+          <div class="skill-name">Networking</div>
+          <div class="skill-desc">TCP/IP, DNS, HTTP/S, firewall concepts, OSI model</div>
+          <div class="bar-wrap"><div class="bar" style="width:78%"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+      <div class="section-label">Projects</div>
+      <div class="project-list">
+
+        <div class="project-card">
+          <div class="proj-icon green"><i class="ti ti-shield-bolt" aria-hidden="true"></i></div>
+          <div class="proj-body">
+            <div class="proj-title">SOC Home Lab — Splunk + Sysmon Threat Detection</div>
+            <div class="proj-label">Personal Lab &nbsp;·&nbsp; June 2026</div>
+            <div class="proj-desc">Built a local attacker/defender environment using VirtualBox with a Windows 11 victim VM and a Kali Linux attacker VM. Installed Sysmon on the Windows machine and forwarded events to Splunk for real-time analysis. Executed a Reverse TCP attack from Kali, then analyzed the resulting Sysmon and Splunk logs to identify the intrusion pattern. Actively expanding with more attack scenarios to deepen detection and analysis skills.</div>
+            <div class="highlight-box"><i class="ti ti-bulb" aria-hidden="true"></i> Caught a live Reverse TCP session in Splunk — traced process creation, network connection events, and command execution through Sysmon event IDs.</div>
+            <div class="tag-row">
+              <span class="tag">Splunk</span>
+              <span class="tag">Sysmon</span>
+              <span class="tag">Kali Linux</span>
+              <span class="tag">VirtualBox</span>
+              <span class="tag tag-green">Reverse TCP</span>
+              <span class="tag tag-green">Windows 11</span>
+              <span class="tag tag-green">Event Log Analysis</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="proj-icon amber"><i class="ti ti-shopping-cart" aria-hidden="true"></i></div>
+          <div class="proj-body">
+            <div class="proj-title">Balaji Dryfruits — E-Commerce Website</div>
+            <div class="proj-label">Frontend Project</div>
+            <div class="proj-desc">Designed and built a complete front-end e-commerce platform from scratch featuring a product catalog, navigation system, and a checkout flow for a retail business. Applied responsive design for cross-device compatibility and followed secure coding practices for customer-facing content.</div>
+            <div class="tag-row">
+              <span class="tag tag-gray">HTML</span>
+              <span class="tag tag-gray">CSS</span>
+              <span class="tag tag-gray">JavaScript</span>
+              <span class="tag tag-gray">Responsive Design</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="proj-icon"><i class="ti ti-truck-delivery" aria-hidden="true"></i></div>
+          <div class="proj-body">
+            <div class="proj-title">Pacer Express — Campus Delivery Platform</div>
+            <div class="proj-label">Backend Engineering &nbsp;·&nbsp; In Development</div>
+            <div class="proj-desc">Engineering a high-performance backend using Java Spring Boot with RESTful APIs covering authentication, inventory validation, and order management. Architected for 1,000+ concurrent users with modular microservices designed for cloud-ready scalability.</div>
+            <div class="tag-row">
+              <span class="tag tag-gray">Java</span>
+              <span class="tag tag-gray">Spring Boot</span>
+              <span class="tag tag-gray">REST API</span>
+              <span class="tag tag-gray">Microservices</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section>
+      <div class="section-label">Experience</div>
+      <div class="project-list">
+        <div class="project-card">
+          <div class="proj-icon"><i class="ti ti-briefcase" aria-hidden="true"></i></div>
+          <div class="proj-body">
+            <div class="proj-title">Web Developer Intern — Vertech India</div>
+            <div class="proj-label">May 2024 – July 2024</div>
+            <div class="proj-desc">Developed and maintained responsive front-end interfaces in HTML, CSS, and JavaScript. Collaborated with QA to reduce UI bugs and managed codebase changes across multiple client projects using Git. Documented workflows and assisted in onboarding — demonstrating the written communication and attention to detail that transfers directly to SOC documentation work.</div>
+            <div class="tag-row">
+              <span class="tag tag-gray">HTML/CSS/JS</span>
+              <span class="tag tag-gray">Git</span>
+              <span class="tag tag-gray">QA Collaboration</span>
+              <span class="tag tag-gray">Technical Documentation</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="proj-icon green"><i class="ti ti-shield-check" aria-hidden="true"></i></div>
+          <div class="proj-body">
+            <div class="proj-title">SOC Analyst (Volunteer) — USC Aiken</div>
+            <div class="proj-label">July 2026 – August 2026</div>
+            <div class="proj-desc">Supported the USC Aiken SOC team in a volunteer capacity, reviewing security events and account activity and building foundational skills in phishing analysis, identity investigation, and alert-triage workflows. Gained hands-on exposure to Microsoft Defender and Microsoft Entra ID/Azure prior to transitioning into a paid intern analyst role.</div>
+            <div class="tag-row">
+              <span class="tag tag-green">Microsoft Defender</span>
+              <span class="tag tag-green">Microsoft Entra ID/Azure</span>
+              <span class="tag tag-gray">Alert Triage</span>
+              <span class="tag tag-gray">Identity Investigation</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="proj-icon green"><i class="ti ti-device-desktop-search" aria-hidden="true"></i></div>
+          <div class="proj-body">
+            <div class="proj-title">SOC Analyst Intern — USC Aiken</div>
+            <div class="proj-label">August 2026 – Present</div>
+            <div class="proj-desc">Triage and investigate security alerts using Microsoft Defender and Microsoft Entra ID/Azure, distinguishing true positives from false positives to prioritize response efforts. Review sign-in and audit logs for suspicious authentication, unauthorized account changes, and other indicators of compromise. Analyze phishing emails, malicious URLs, and sender/user behavior, documenting investigation findings to support incident response.</div>
+            <div class="tag-row">
+              <span class="tag tag-green">Alert Triage</span>
+              <span class="tag tag-green">Phishing Analysis</span>
+              <span class="tag tag-green">Log Analysis</span>
+              <span class="tag tag-gray">Incident Documentation</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education">
+      <div class="section-label">Education</div>
+      <div class="card">
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-date">2023 – Expected May 2027</div>
+            <div class="tl-title">B.S. Computer Science — Cybersecurity Concentration</div>
+            <div class="tl-sub">University of South Carolina Aiken &nbsp;·&nbsp; GPA 4.0</div>
+            <div class="gpa-banner">
+              <span class="gpa-pill"><i class="ti ti-trophy" style="font-size:12px" aria-hidden="true"></i> President's List — Fall 2025</span>
+              <span class="gpa-pill"><i class="ti ti-trophy" style="font-size:12px" aria-hidden="true"></i> President's List — Spring 2026</span>
+            </div>
+            <div class="tl-sub" style="margin-top:8px">Relevant coursework: Networking Fundamentals, Operating Systems, Data Structures, Algorithms</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot green"></div>
+            <div class="tl-date">Goal — 2026 / 2027</div>
+            <div class="tl-title">Tier 1 SOC Analyst or Security Analyst Job</div>
+            <div class="tl-sub">Targeting roles in alert triage, threat detection, and incident documentation</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certifications -->
+    <section>
+      <div class="section-label">Certifications &amp; Training</div>
+      <div class="cert-grid">
+        <div class="cert-card">
+          <i class="ti ti-award" aria-hidden="true"></i>
+          <div>
+            <div class="cert-name">CompTIA Security+</div>
+            <div class="cert-issuer">CompTIA</div>
+            <div class="cert-inprogress">In progress</div>
+          </div>
+        </div>
+        <div class="cert-card">
+          <i class="ti ti-sword" aria-hidden="true"></i>
+          <div>
+            <div class="cert-name">HackTheBox — SOC Level 1</div>
+            <div class="cert-issuer">HackTheBox Academy</div>
+            <div class="cert-active">Actively practicing</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="section-label">Contact</div>
+      <div class="contact-row">
+        <a class="contact-chip" href="mailto:sohamkhot2005@gmail.com"><i class="ti ti-mail" aria-hidden="true"></i> sohamkhot2005@gmail.com</a>
+        <a class="contact-chip" href="mailto:skhot@usca.edu"><i class="ti ti-school" aria-hidden="true"></i> skhot@usca.edu</a>
+        <a class="contact-chip" href="https://www.linkedin.com/in/soham-khot-5aa6a1222/" target="_blank" rel="noopener"><i class="ti ti-brand-linkedin" aria-hidden="true"></i> LinkedIn</a>
+        <a class="contact-chip" href="https://github.com/TFSAM5588" target="_blank" rel="noopener"><i class="ti ti-brand-github" aria-hidden="true"></i> GitHub</a>
+        <a class="contact-chip" href="tel:+18032628461"><i class="ti ti-phone" aria-hidden="true"></i> (803) 262-8461</a>
+      </div>
+    </section>
+
+    <footer>
+      Soham Khot &nbsp;·&nbsp; Cybersecurity Portfolio &nbsp;·&nbsp; Aiken, SC &nbsp;·&nbsp; 2026<br>
+      <span style="margin-top:6px; display:inline-block;">Authorized to work in the U.S. &nbsp;·&nbsp; Available for internship or entry-level roles</span>
+    </footer>
+
+  </div>
+
+  <script>
+    const sections = document.querySelectorAll('section[id]');
+    const navBtns = document.querySelectorAll('.nav-links button');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navBtns.forEach((btn, i) => {
+            const targets = ['about','skills','projects','education','contact'];
+            btn.classList.toggle('active', targets[i] === entry.target.id);
+          });
+        }
+      });
+    }, { rootMargin: '-60px 0px -60% 0px', threshold: 0 });
+
+    sections.forEach(s => observer.observe(s));
+  </script>
+</body>
+</html>
